@@ -37,33 +37,28 @@ const Button: FC<ButtonProps> = (props) => {
     href,
     ...restProps
   } = props
+
   const classes = classNames('btn', className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     'disabled': (btnType === ButtonType.Link) && disabled
   })
 
-  if (btnType === ButtonType.Link || href) {
-    return (
-      <a
-        href={href}
-        className={classes}
-        {...restProps}
-      >
-        {children}
-      </a>
-    )
-  } else {
-    return (
-      <button
-        className={classes}
-        disabled={disabled}
-        {...restProps}
-      >
-        {children}
-      </button>
-    )
-  }
+  return btnType === ButtonType.Link || href
+    ? (<a
+      href={href}
+      className={classes}
+      {...restProps}
+    >
+      {children}
+    </a>)
+    : (<button
+      className={classes}
+      disabled={disabled}
+      {...restProps}
+    >
+      {children}
+    </button>)
 }
 
 Button.defaultProps = {
